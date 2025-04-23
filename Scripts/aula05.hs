@@ -41,27 +41,29 @@ Por exemplo, f11 "ab42c570sd3f" retorna [('a',False,1),('b',False,1),
 ('0',False,1),('s',True,51),('d',False,1),('3',False,1),('f',True,51)] -}
 
 f11::String->[(Char, Bool, Int)]
-f11 [ ]     = []       -- caso base: string vazia
-f11 [a]      = [(a, False, 1)]                -- último caractere da string: nunca é repetido
+f11 [ ]      = []       -- caso base: string vazia
+f11 [a]      = [(a, False, 1)]   -- último caractere da string: nunca é repetido
 f11 (a:b:xs)
   | isDigit a && not (isDigit b) = 
       (a, False, 1) : (b, True, ord a) : f11 xs
   | otherwise = 
       (a, False, 1) : f11 (b:xs)
 
-
 {-Agora, implemente a função f111 que receba [(Char, Bool, Int)] e gere uma String
 com os caracteres repetidos ou não (como R em f1). Use o Bool da dupla-}
 
 f111:: [(Char, Bool, Int)] -> String
 f111 [] = []
+f111 ((c, False, _) : xs) = c : f111 xs         -- se não vai repetir, só coloca uma vez
+f111 ((c, True, n)  : xs) = replicate n c ++ f111 xs  -- se vai repetir, usa replicate
 
 {-faça a função f2 que receba uma lista de
 Strings e aplique a todas as strings a 
 computação da função f1-}
 
 f2::[String]->[String]
-f2 [] = []
+f2 [] = []                               -- caso base: lista vazia
+f2 (x:xs) = f1 x : f2 xs                 -- aplica f1 ao primeiro elemento, e chama recursivamente pro resto
 
 {-faça a função f3 que receba uma String S 
 e retorne uma dupla de Bool e String.
