@@ -55,7 +55,8 @@ com os caracteres repetidos ou não (como R em f1). Use o Bool da dupla-}
 f111:: [(Char, Bool, Int)] -> String
 f111 [] = []
 f111 ((c, False, _) : xs) = c : f111 xs         -- se não vai repetir, só coloca uma vez
-f111 ((c, True, n)  : xs) = replicate n c ++ f111 xs  -- se vai repetir, usa replicate
+f111 ((c, True, n)  : xs) = replicate n c ++ f111 xs  
+-- se vai repetir, usa replicate: cria uma String com o caractere c repetido n vezes(função padrão do Haskell)
 
 {-faça a função f2 que receba uma lista de
 Strings e aplique a todas as strings a 
@@ -75,4 +76,5 @@ a entrada foi ou não alterada.
 Ex:  f3 "a2c4x" retorna ("abcdx", True)-}
 
 --f3::String -> (String, Bool)
-
+f3:: String ->(String, Bool)
+f3 
