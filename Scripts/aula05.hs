@@ -76,5 +76,12 @@ a entrada foi ou não alterada.
 Ex:  f3 "a2c4x" retorna ("abcdx", True)-}
 
 --f3::String -> (String, Bool)
+
+altera :: String - > String
+altera [] = []
+altera (a:x) 
+    | 
 f3:: String ->(String, Bool)
-f3 
+f3 [] = ([], False)
+f3 x = (altera(x), avalia x)
+
