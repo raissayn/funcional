@@ -34,7 +34,7 @@ multiplica x y
 -- questão 4
 invertInt :: Int -> Int 
 invertInt 0 = 0
-invertInt (x:xs) = invertInt xs ++ x
+invertInt (x:xs) = invertInt xs ++ [x]
 
 -- questão 5
 square :: Int -> Int
