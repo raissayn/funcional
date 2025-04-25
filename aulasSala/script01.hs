@@ -102,7 +102,7 @@ myInit (x:xs) = x : myInit xs
 {- Exercício: 
    Implementar a função que retorna o maior elemento de uma lista -}
 
-maiorElemento :: [Int] -> Int -> Int
+maiorElemento :: [Int] -> Int
 maiorElemento [] _ = error "Lista vazia"
 maiorElemento [x] _ = x
 maiorElemnto (x:xs) 0
