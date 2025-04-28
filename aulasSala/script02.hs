@@ -9,7 +9,7 @@ periodo = 7
 f :: Int -> Int
 f 1 = 41
 f 2 = 72
-f 3 = 48
+f 3 = 48   
 f 4 = 2
 f 5 = 91
 f 6 = 55

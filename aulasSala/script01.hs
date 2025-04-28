@@ -23,7 +23,7 @@ searchList a (b:bs)
 deleteList::Int->[Int]->[Int]
 deleteList _ [] = []
 deleteList y (x:xs)
-    |y == x = deleteList y xs
+    |y == x = deleteList y xs -- Chama denovo para caso tenha outra ocorrência!
     |otherwise = x : deleteList y xs
 
 
@@ -99,13 +99,12 @@ myInit [] = error "Lista vazia"
 myInit [x] = []
 myInit (x:xs) = x : myInit xs
 
-{- Exercício: 
-   Implementar a função que retorna o maior elemento de uma lista -}
-
+{- Exercício: Implementar a função que retorna o maior elemento de uma lista -}
 maiorElemento :: [Int] -> Int
-maiorElemento [] _ = error "Lista vazia"
-maiorElemento [x] _ = x
-maiorElemnto (x:xs) 0
+maiorElemento [] = error "Lista vazia"
+maiorElemento [x] = x
+maiorElemento (x:xs) = max x (maiorElemento xs)
+
 
 
 
