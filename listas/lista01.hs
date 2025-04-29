@@ -322,3 +322,4 @@ equacao (a,b,c)
     | (b*b) - (4*a*c) < 0 = error "Raiz negativa"
     | otherwise = (((-b) + sqrt((b*b) - (4*a*c))) / (2*a),
                    ((-b) - sqrt((b*b) - (4*a*c))) / (2*a))
+

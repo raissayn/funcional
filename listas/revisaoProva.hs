@@ -154,7 +154,9 @@ vendas 6 = 55
 vendas 7 = 30
 
 {- 01 função que retorna uma lista de vendas -}
-
+listaVenda :: Int -> [Int]
+listaVenda (-1) = []
+listaVenda n = listaVendas (n - 1) ++ [vendas n] -- PRESTA ATENÇÃO NISSO 
 
 {- 02 função que retorna [[Int]] com listas de dia e venda -}
 
