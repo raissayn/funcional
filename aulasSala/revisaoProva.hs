@@ -9,19 +9,45 @@
 -}
      
 {- 01 função que soma os elementos de uma lista -}
+somaLista :: [Int] -> Int
+somaLista [] = 0
+somaLista (x:xs) = x + somaLista xs 
 
 {- 02-localiza elemento em lista -}
+localiza :: Int -> [Int] -> Bool
+localiza _ [] = False
+localiza y (x:xs)
+  | x == y = True
+  | otherwise = localiza y xs
 
 {-03 remove todas ocorrências de y em uma lista -}
+removOcorrencia :: Int -> [Int] -> [Int]
+removOcorrencia _ [] = []
+removOcorrencia y (x:xs)
+  | y == x = removOcorrencia y xs
+  | otherwise = x : removOcorrencia y xs
 
 {-04 informa o tamanho de uma lista -}
+tamLista [Int] -> Int
+tamLista [] = 0
+tamLista (x:xs) = 1 + tamLista xs
 
 {-05 conta a ocorrência de um Int em [Int] -}
+ocorrencia Int -> [Int] -> Int
+ocorrencia _ [] = 0
+ocorrencia y (x:xs)
+  | x == y = 1 + ocorrencia y xs
+  | otherwise = ocorrencia y xs
 
 {- 06 inverte a lista -}
+invert [Int] -> [Int]
+invert [] = []
+invert (x:xs) = invert xs ++ [x]
 
 {- 07 inverte elementos das listas internas -}
-
+invert1 [[Int]] -> [[Int]]
+invert [] = []
+invert (x:xs) = 
 {- 08 função que exclui a penúltima ocorrência de um número na lista-}
 -------------------------------------------------------------
 {- Exercícios
