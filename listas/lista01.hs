@@ -226,11 +226,13 @@ ehA (x:xs) a
 
 -- questão 27
 purifica :: [Int] -> [Int]
+purifica [] = []
 purifica (x:xs)= true pertence xs
     | pertence x xs = purifica xs
     | otherwise = x : purifica xs
 
 pertence :: Int -> [Int] -> Bool
+pertence _ [] = False
 pertence a (x:xs)
     | a == x = true
     | otherwise = pertence a xs
