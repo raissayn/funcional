@@ -80,6 +80,9 @@ myInit [] = []
 myInit (x:xs) = x : myInit xs 
 
 {- Exercício: Implementar a função que retorna o maior elemento de uma lista -}
+maiorElem :: [Int] -> Int
+maiorElem [] = 0
+maiorElem (x:xs)
 
 -----------------------------------------------------------------------------------
 {-SCRIPT O2 -}
