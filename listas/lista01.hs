@@ -212,3 +212,27 @@ separa (x:xs)
     | otherwise      = (pares, x : impares)
   where
     (pares, impares) = separa xs
+
+-- questão 23
+converte [] = ""
+converte (x:xs) = chr (x + ord 'A' - 1) : converte xs
+
+-- questão 26
+ehA :: [Char] -> Char -> Int
+ehA [] a = 0
+ehA (x:xs) a 
+    | ord x == ord a = 1 + ehA xs a
+    | otherwise = ehA xs a
+
+-- questão 27
+purifica :: [Int] -> [Int]
+purifica (x:xs)= true pertence xs
+    | pertence x xs = purifica xs
+    | otherwise = x : purifica xs
+
+pertence :: Int -> [Int] -> Bool
+pertence a (x:xs)
+    | a == x = true
+    | otherwise = pertence a xs
+
+-- questão 28
