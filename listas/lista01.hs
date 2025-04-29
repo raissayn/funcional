@@ -238,3 +238,82 @@ pertence a (x:xs)
     | otherwise = pertence a xs
 
 -- questão 28
+proliferaInt :: [Int] -> [Int]
+proliferaInt [] = []
+proliferaInt (x:xs)
+    | x <= 0 = proliferaInt xs
+    | otherwise = replica x  ++ proliferaInt xs
+
+replica :: Int -> [Int]
+replica n
+    | n <= 0 = []
+    | otherwise = n : replica (n-1)
+
+-- questão 29
+proliferaChar :: [Char] -> [Char]
+proliferaChar [] = []
+proliferaChar (x:xs) = replica (ordem x) x ++ proliferaChar xs
+
+-- Calcula a ordem da letra no alfabeto
+ordem :: Char -> Int
+ordem c = fromEnum c - fromEnum 'A' + 1
+
+-- Repete o caractere n vezes (sem usar replicate)
+replica :: Int -> Char -> [Char]
+replica n c
+    | n <= 0 = []
+    | otherwise = c : replica (n-1) c
+
+-- questão 30
+
+-- Exercicio 31: Funcoes de rg
+pessoa :: Int -> (String, Int, Char)
+pessoa rg
+    | rg == 1 = ("Joao Silva", 12, 'm')
+    | rg == 2 = ("Jonas Souza", 51, 'm')
+    | rg == 3 = ("Maria Oliveira", 34, 'f')
+    | rg == 4 = ("Ana Costa", 28, 'f')
+    | rg == 5 = ("Carlos Pereira", 45, 'm')
+    | rg == 6 = ("Fernanda Lima", 19, 'f')
+    | rg == 7 = ("Paulo Santos", 60, 'm')
+    | rg == 8 = ("Juliana Alves", 25, 'f')
+    | rg == 9 = ("Ricardo Mendes", 33, 'm')
+    | rg == 10 = ("Beatriz Rocha", 40, 'f')
+    | otherwise = ("Não há ninguém mais", 9999, 'x')
+
+prm :: (a,b,c) -> a
+prm (x,_,_) = x
+
+sec :: (a,b,c) -> b
+sec (_,x,_) = x
+
+trc :: (a,b,c) -> c
+trc (_,_,x) = x
+
+-- a) nome da pessoa de menor idade
+menorIdade Int -> String
+menorIdade x 
+-- INCOMPLETA
+
+-- questão 32
+ordena :: Int -> Int -> Int -> Int -> (Int, Int, Int, Int)
+ordena a b c d
+    | a <= b && a <= c && a <= d = (a, menor2 b c d)
+    | b <= a && b <= c && b <= d = (b, menor2 a c d)
+    | c <= a && c <= b && c <= d = (c, menor2 a b d)
+    | otherwise                  = (d, menor2 a b c)
+
+menor2 :: Int -> Int -> Int -> (Int, Int, Int)
+menor2 x y z
+    | x <= y && x <= z = (x, menor3 y z)
+    | y <= x && y <= z = (y, menor3 x z)
+    | otherwise        = (z, menor3 x y)
+
+menor3 :: Int -> Int -> (Int, Int)
+menor3 x y
+    | x <= y = (x, y)
+    | otherwise = (y, x)
+
+-- questão 33 ???
+
+
