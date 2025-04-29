@@ -77,12 +77,14 @@ myLat (_:xs) = myLast xs
 {- myInit que recebe uma lista x e retorna a lista x sem o último elemento -}
 myInit :: [Int] -> [Int] 
 myInit [] = []
+myInit [x] = []
 myInit (x:xs) = x : myInit xs 
 
 {- Exercício: Implementar a função que retorna o maior elemento de uma lista -}
-maiorElem :: [Int] -> Int
-maiorElem [] = 0
-maiorElem (x:xs)
+maiorElemento :: [Int] -> Int
+maiorElemento [] = error "Lista vazia"
+maiorElemento [x] = x
+maiorElemento (x:xs) = max x (maiorElemento xs)
 
 -----------------------------------------------------------------------------------
 {-SCRIPT O2 -}
@@ -105,17 +107,31 @@ f 7 = 30
 f _ = 0
 
 {- retorna o total de vendas do período -}
+totalVendas :: Int -> Int
+totalVendas d = f d + totalVendas (d - 1) --lembrar d-1
+
 {-encontra o dia em que mais se vendeu no período - versão 01-}
+DiaMaiorVenda01 :: Int -> Int
+DiaMaiorVenda01 y  
+    | f y >= f (diaMaiorVenda01(y-1)) = y
+    | otherwise = diaMaiorVenda01(y-1)
 
 {-encontra o dia em que mais se vendeu no período - versão 02
   tem como parâmetros o período e a maior venda -}
+diaMaiorVenda02 Int -> Int -> Int
 
 {- encontra o maior valor entre dois inteiros -}
+maxi Int -> Int -> Int
+maxi a b
+  | a > b = a
+  | otherwise = b
 
 {- encontra a maior venda - 
    Exercício: implemente essa função com apenas dois parâmetros e 
    fazendo uso de maxi no código interno-}
-
+maiorVenda Int -> Int -> Int
+maiorVenda x y
+  | 
 {- media vendas-}
 
 -----------------------------------------------------------------------------------

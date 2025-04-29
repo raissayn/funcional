@@ -316,4 +316,9 @@ menor3 x y
 
 -- questão 33 ???
 
-
+-- questão 34 - Equação de Segundo grau
+equacao :: (Float,Float,Float) -> (Float,Float)
+equacao (a,b,c) 
+    | (b*b) - (4*a*c) < 0 = error "Raiz negativa"
+    | otherwise = (((-b) + sqrt((b*b) - (4*a*c))) / (2*a),
+                   ((-b) - sqrt((b*b) - (4*a*c))) / (2*a))
