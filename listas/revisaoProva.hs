@@ -60,12 +60,19 @@ invert1 (x:xs) = invert x : invert1 xs
 -}    
 
 {-myHead que recebe uma lista x e retorna a cabeça de x-}
+myHead :: [Int] -> Int
+myHead (x:_) = x
 
 {- myTail que recebe uma lista x e retorna a lista x sem a cabeça -}
+myTail :: [Int] -> [Int]
+myTail (_:xs) = xs
 
 {- myLast que recebe uma lista x e retorna o último elemento de x -}
+myLast :: [Int] -> Int
+myLat (_:xs) = myLast xs
 
 {- myInit que recebe uma lista x e retorna a lista x sem o último elemento -}
+myInit 
 
 {- Exercício: Implementar a função que retorna o maior elemento de uma lista -}
 
