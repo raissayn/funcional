@@ -1,2 +1,0 @@
--- revisar LISTA (FOCO EM LISTA/TUPAS)
-
