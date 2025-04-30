@@ -1,3 +1,5 @@
+import Data.Char
+
 -- questão 1
 f1 :: Float -> Float
 f1 x
