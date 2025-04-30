@@ -32,7 +32,15 @@ myZip (b:bs) (c:cs) = (b, c) : myZip bs cs
 setAlfa :: String -> [(Bool, Char)]
 setAlfa [] = []
 setAlfa (c:cs) = (isAlphaNum c, c) : setAlfa cs
-
+--------
+setAlfa' :: String -> [(Bool, Char)]
+setAlfa' [] = []
+setAlfa' (c:cs) = ((ehAlfaNum c), c) : setAlfa' cs
+  where
+    ehAlfaNum x =
+      (x >= 'a' && x <= 'z') ||
+      (x >= 'A' && x <= 'Z') ||
+      (x >= '0' && x <= '9')
    
 -- {- 05 função que recebe [(Bool, Char)] e filtra alfanuméricos -}
 -- --filtraAlfa:: [(Bool,Char)] -> String
@@ -48,6 +56,9 @@ filtraAlfa ((b, c):xs)
 -- --alfaToInt::String -> [Int]
 alfaToInt :: String -> [Int]
 alfaToInt = map ord
+
+alfaToInt'[] = []
+alfaToInt' (c:cs) = ord c : alfaToInt cs
 
 -- {-O map é usado para aplicar a função ord (que converte um Char em Int)
 -- a cada caractere da String fornecida, gerando a lista de códigos ASCII 

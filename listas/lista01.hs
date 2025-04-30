@@ -292,10 +292,47 @@ sec (_,x,_) = x
 trc :: (a,b,c) -> c
 trc (_,_,x) = x
 
--- a) nome da pessoa de menor idade
-menorIdade Int -> String
-menorIdade x 
--- INCOMPLETA
+
+
+-- a) pessoa de menor de idade ate determinado registro
+menorIdade :: Int -> String
+menorIdade x = menorIdadeAUX x x
+
+menorIdadeAUX :: Int -> Int -> String
+menorIdadeAUX 0 x = prm (pessoa x)
+menorIdadeAUX n x
+    | sec (pessoa n) < sec (pessoa x) = menorIdadeAUX (n-1) n
+    | otherwise = menorIdadeAUX (n-1) x
+
+-- b) Idade media das pessoas ate determinado registro
+idadeMedia :: Int -> Int
+idadeMedia 0 = 0
+idadeMedia x = (somaIdades x) `div` x
+
+somaIdades :: Int -> Int
+somaIdades 0 = 0
+somaIdades x = sec (pessoa x) + somaIdades (x-1)
+
+-- c) numero de pessoas do sexo masculino
+numDeMasc :: Int
+numDeMasc = numDeMascAUX 1
+
+numDeMascAUX :: Int -> Int
+numDeMascAUX n 
+    | trc (pessoa n) == 'm' = 1 + numDeMascAUX (n+1)
+    | trc (pessoa n) == 'f' = numDeMascAUX (n+1)
+    | trc (pessoa n) == 'x' = 0
+    | otherwise = numDeMascAUX (n+1)
+
+-- d) Numero do registro da pessoa de maior idade
+maiorIdade :: Int
+maiorIdade = maiorIdadeAUX 1 1
+
+maiorIdadeAUX :: Int -> Int -> Int
+maiorIdadeAUX x y
+    | trc (pessoa x) == 'x' = y
+    | sec (pessoa x) > sec (pessoa y) = maiorIdadeAUX (x+1) x
+    | otherwise = maiorIdadeAUX (x+1) y
 
 -- questão 32
 ordena :: Int -> Int -> Int -> Int -> (Int, Int, Int, Int)
@@ -325,3 +362,131 @@ equacao (a,b,c)
     | otherwise = (((-b) + sqrt((b*b) - (4*a*c))) / (2*a),
                    ((-b) - sqrt((b*b) - (4*a*c))) / (2*a))
 
+
+
+-- questão 36: Base de professores
+base :: Int -> (Int, String, String, Char)
+base x
+    | x == 0  = (1452, "Luciana Prado", "DOUTOR", 'F')
+    | x == 1  = (1903, "Ricardo Moreira", "MESTRE", 'M')
+    | x == 2  = (1601, "Juliana Costa", "MESTRE", 'F')
+    | x == 3  = (1789, "Bruno Mendes", "DOUTOR", 'M')
+    | x == 4  = (1333, "Helena Barbosa", "DOUTOR", 'F')
+    | x == 5  = (1740, "Fábio Santos", "MESTRE", 'M')
+    | x == 6  = (1855, "Carla Ferreira", "MESTRE", 'F')
+    | x == 7  = (1499, "Tiago Lima", "DOUTOR", 'M')
+    | x == 8  = (1711, "Gabriela Nogueira", "MESTRE", 'F')
+    | x == 9  = (1670, "Eduardo Matos", "DOUTOR", 'M')
+    | x == 10 = (0, "", "", '0')
+    | otherwise = (0, "", "", '0')
+
+
+prm4 :: (a,b,c,d) -> a
+prm4 (x,_,_,_) = x
+
+sgd4 :: (a,b,c,d) -> b
+sgd4 (_,x,_,_) = x
+
+trc4 :: (a,b,c,d) -> c
+trc4 (_,_,x,_) = x
+
+qrt4 :: (a,b,c,d) -> d 
+qrt4 (_,_,_,x) = x
+
+-- a) Numero de doutores na base
+qtdDoutores :: Int
+qtdDoutores = qtdDoutoresAUX 0
+
+qtdDoutoresAUX :: Int -> Int
+qtdDoutoresAUX x 
+    | prm4 (base x) == 0 = 0
+    | trc4 (base x) == "DOUTOR" = 1 + qtdDoutoresAUX (x+1)
+    | otherwise = qtdDoutoresAUX (x+1)
+
+-- b) Numero de mulheres
+qtdMulheres :: Int
+qtdMulheres = qtdMulheresAUX 0
+
+qtdMulheresAUX :: Int -> Int
+qtdMulheresAUX x
+    | prm4 (base x) == 0 = 0
+    | qrt4 (base x) == 'F' = 1 + qtdMulheresAUX (x+1)
+    | otherwise = qtdMulheresAUX (x+1)
+
+-- c) Numero de Mestres do sexo Masculino
+qtdMestreMasc :: Int
+qtdMestreMasc = qtdMestreMascAUX 0
+
+qtdMestreMascAUX :: Int -> Int
+qtdMestreMascAUX x 
+    | prm4 (base x) == 0 = 0
+    | trc4 (base x) == "MESTRE" && qrt4 (base x) == 'M' = 1 + qtdMestreMascAUX (x+1)
+    | otherwise =  qtdMestreMascAUX (x+1)
+
+-- d) Nome do professor mais antigo
+profMaisAntigo :: String
+profMaisAntigo = sgd4 (base (profMaisAntigoAUX 0 0))
+
+profMaisAntigoAUX :: Int -> Int -> Int 
+profMaisAntigoAUX x y
+    | prm4 (base x) == 0 = y
+    | prm4 (base x) < prm4 (base y) = profMaisAntigoAUX (x+1) x
+    | otherwise = profMaisAntigoAUX (x+1) y
+
+-- questão 37: 
+type Acervo = [(Isbn, Titulo, Reserva, Volumes)]
+type Emprestimo = [(Matricula, Isbn)]
+
+type Isbn = Int -- Isbn de um livro
+type Volumes = Int -- quantidade no acervo
+type Titulo = String -- título do livro
+type Matricula = String -- matrícula do discente
+type Reserva = Bool -- deve permanecer na biblioteca?
+
+acervo :: Acervo
+acervo = [
+    (1, "Haskell Básico", False, 3),
+    (2, "Programação Funcional", True, 2),
+    (3, "Estruturas de Dados", False, 1),
+    (4, "Compiladores", False, 0)
+    ]
+
+emprestimo :: Emprestimo
+emprestimo = [
+    ("2023001", 1),
+    ("2023002", 1),
+    ("2023003", 3)
+    ]
+
+-- a) Reservado = True, 
+func_1::Isbn-> Acervo -> Bool
+func_1 _ [] = error "Isbn nao encontrado"
+func_1 x (a:as) 
+    | x == prm4 a = not (trc4 a)
+    | otherwise = func_1 x as
+
+-- b) quantidade de livros emprestado
+func_2::Isbn -> Emprestimo -> Int
+func_2 _ [] = 0
+func_2 x (a:as)
+    | x == (snd a) = 1 + (func_2 x as)
+    | otherwise = func_2 x as
+
+-- c) quantidade de livros no acervo
+func_3::Isbn -> Acervo -> Int
+func_3 _ [] = 0
+func_3 x (a:as)
+    | x == prm4 a = qrt4 a
+    | otherwise = func_3 x as
+
+-- d) quantidade de livros disponiveis para emprestimo
+func_4 :: Isbn -> Int
+func_4 x
+    | (func_3 x acervo) == (func_2 x emprestimo) || not (func_1 x acervo) = 0
+    | otherwise = (func_3 x acervo) - (func_2 x emprestimo)
+
+-- e) recebe a matricula e o isbn e ve se pode pegar ou nao o livro
+func_5 :: Matricula -> Isbn -> Emprestimo
+func_5 mat isbn 
+    | (func_4 isbn) /= 0 = (mat,isbn) : emprestimo  
+    | otherwise = emprestimo 
